@@ -8,11 +8,13 @@ depend() {
 
 # set the default to QEMU
 [ -z ${LIBVIRT_URIS} ] && LIBVIRT_URIS="qemu:///system"
+
 # default to suspending the VM via managedsave
 case "${LIBVIRT_SHUTDOWN}" in
-	managedsave|shutdown) ;;
+	managedsave|shutdown|destroy) ;;
 	*) LIBVIRT_SHUTDOWN="managedsave" ;;
 esac
+
 # default to 500 seconds
 [ -z ${LIBVIRT_MAXWAIT} ] && LIBVIRT_MAXWAIT=500
 
@@ -20,23 +22,23 @@ gueststatefile="/var/lib/libvirt/libvirt-guests.state"
 netstatefile="/var/lib/libvirt/libvirt-net.state"
 
 do_virsh() {
-    local hvuri=$1
-    shift
+	local hvuri=$1
+	shift
 
 	# if unset, default to qemu
 	[ -z ${hvuri} ] && hvuri="qemu:///system"
 	# if only qemu was supplied then correct the value
 	[ "xqemu" = x${hvuri} ] && hvuri="qemu:///system"
 
-    # Silence errors because virsh always throws an error about
-    # not finding the hypervisor version when connecting to libvirtd
+	# Silence errors because virsh always throws an error about
+	# not finding the hypervisor version when connecting to libvirtd
 	# lastly strip the blank line at the end
-    LC_ALL=C virsh -c ${hvuri} "$@" 2>/dev/null | head -n -1
+	LC_ALL=C virsh -c ${hvuri} "$@" 2>/dev/null | head -n -1
 }
 
 libvirtd_dom_list() {
-    # Only work with domains by their UUIDs
-    do_virsh "$1" list --uuid $2
+	# Only work with domains by their UUIDs
+	do_virsh "$1" list --uuid $2
 }
 
 libvirtd_dom_count() {
@@ -44,8 +46,8 @@ libvirtd_dom_count() {
 }
 
 libvirtd_net_list() {
-    # Only work with networks by their UUIDs
-    do_virsh "$1" net-list --uuid $2
+	# Only work with networks by their UUIDs
+	do_virsh "$1" net-list --uuid $2
 }
 
 libvirtd_net_count() {
@@ -60,9 +62,9 @@ libvirtd_dom_stop() {
 	local uri=$1
 	local persist=$2
 	local shutdown_type=${LIBVIRT_SHUTDOWN}
-    local counter=${LIBVIRT_MAXWAIT}
-    local dom_name=
-    local dom_ids=
+	local counter=${LIBVIRT_MAXWAIT}
+	local dom_name=
+	local dom_ids=
 	local uuid=
 	local dom_count=
 
@@ -188,10 +190,10 @@ start() {
 }
 
 stop() {
-    local counter=
-    local dom_name=
-    local net_name=
-    local dom_ids=
+	local counter=
+	local dom_name=
+	local net_name=
+	local dom_ids=
 	local uuid=
 	local dom_count=
 

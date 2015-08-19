@@ -11,7 +11,7 @@ depend() {
 
 # default to suspending the VM via managedsave
 case "${LIBVIRT_SHUTDOWN}" in
-	managedsave|shutdown) ;;
+	managedsave|shutdown|destroy) ;;
 	*) LIBVIRT_SHUTDOWN="managedsave" ;;
 esac
 

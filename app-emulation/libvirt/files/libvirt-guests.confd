@@ -9,16 +9,16 @@
 
 # LIBVIRT_SHUTDOWN
 # Valid options:
-# * shutdown - Sends an ACPI shutdown (think of this as a request to your guest
-#              to shutdown). There is no way to distinguish between guests that
-#              are ignoring the shutdown request or are stuck or are taking
-#              a long time to shutdown. We will wait LIBVIRT_MAXWAIT seconds
-#              before yanking the power out.
-# * suspend  - Performs a state save external to the VM. qemu-kvm will stop
-#              stop the CPU and save off all state to a separate file. When
-#              the machine is started again, it will resume like nothing ever
-#              happened. This is guarenteed to always successfully stop your
-#              machine and restart it.
+# * shutdown -    Sends an ACPI shutdown (think of this as a request to your guest
+#                 to shutdown). There is no way to distinguish between guests that
+#                 are ignoring the shutdown request or are stuck or are taking
+#                 a long time to shutdown. We will wait LIBVIRT_MAXWAIT seconds
+#                 before yanking the power out.
+# * managedsave - Performs a state save external to the VM. qemu-kvm will stop
+#                 stop the CPU and save off all state to a separate file. When
+#                 the machine is started again, it will resume like nothing ever
+#                 happened. This is guarenteed to always successfully stop your
+#                 machine and restart it.
 
 #LIBVIRT_SHUTDOWN="suspend"
 

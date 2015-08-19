@@ -1,7 +1,7 @@
 # /etc/conf.d/libvirtd
 
 # LIBVIRT_URIS
-# libvirt URIs to communicate with to start/stop guests
+# space separated list of libvirt URIs to communicate with to start/stop guests
 # Valid values are anything that can be passed to 'virsh connect'
 
 #LIBVIRT_URIS="qemu:///system"
